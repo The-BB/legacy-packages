@@ -1,0 +1,22 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -350,7 +350,6 @@ AC_CHECK_MEMBERS(m4_normalize([
+ AC_CHECK_HEADERS(m4_normalize([
+ 	asm/cachectl.h
+ 	asm/sysmips.h
+-	bluetooth/bluetooth.h
+ 	elf.h
+ 	inttypes.h
+ 	linux/bsg.h
+--- a/config.h.in
++++ b/config.h.in
+@@ -51,9 +51,6 @@
+ /* Define to 1 if you have BLKGETSIZE64. */
+ #undef HAVE_BLKGETSIZE64
+ 
+-/* Define to 1 if you have the <bluetooth/bluetooth.h> header file. */
+-#undef HAVE_BLUETOOTH_BLUETOOTH_H
+-
+ /* Define to 1 if you have the declaration of `BTRFS_COMPRESS_LZO', and to 0
+    if you don't. */
+ #undef HAVE_DECL_BTRFS_COMPRESS_LZO
