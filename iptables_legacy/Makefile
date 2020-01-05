@@ -21,7 +21,7 @@ PKG_SOURCE_URL:=http://www.netfilter.org/projects/iptables/files \
 	ftp://ftp.no.netfilter.org/pub/netfilter/iptables/
 PKG_HASH:=52004c68021da9a599feed27f65defcfb22128f7da2c0531c0f75de0f479d3e0
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(KERNEL_BUILD_DIR)/iptables-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/iptables-$(PKG_VERSION)
 
 PKG_FIXUP:=autoreconf
 
