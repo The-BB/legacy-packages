@@ -17,7 +17,7 @@ PKG_SOURCE:=strace-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@SF/$(PKG_NAME)
 PKG_HASH:=5bed5110b243dce6864bedba269446c18c8c63f553cdd7fd4f808d89a764712f
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(KERNEL_BUILD_DIR)/strace-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/strace-$(PKG_VERSION)
 
 PKG_LICENSE:=BSD-3c
 PKG_LICENSE_FILES:=COPYRIGHT
@@ -59,6 +59,7 @@ define Package/strace_legacy/config
 choice
 	prompt "stack tracing support"
 	default STRACE_LEGACY_NONE
+	depends on LINUX_2_6_22
 
 	config STRACE_LEGACY_NONE
 		bool "None"
