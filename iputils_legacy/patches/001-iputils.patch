@@ -1,0 +1,11 @@
+--- a/Makefile
++++ b/Makefile
+@@ -16,7 +16,7 @@ CC=gcc
+ CCOPT=-D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall -g
+ CFLAGS=$(CCOPT) $(GLIBCFIX) $(DEFINES) 
+ 
+-IPV4_TARGETS=tracepath ping clockdiff rdisc arping tftpd rarpd
++IPV4_TARGETS=tracepath ping clockdiff arping tftpd
+ IPV6_TARGETS=tracepath6 traceroute6 ping6
+ TARGETS=$(IPV4_TARGETS) $(IPV6_TARGETS)
+ 
