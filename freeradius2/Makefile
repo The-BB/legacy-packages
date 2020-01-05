@@ -71,7 +71,7 @@ define Package/freeradius2-common
   $(call Package/freeradius2/Default)
   TITLE:=common files
   DEPENDS:=+libpthread +FREERADIUS_OPENSSL:libopenssl +zlib
-  DEPENDS+=@LINUX_2_6_22 +USE_UCLIBC:libubacktrace +USE_UCLIBC:libnsl
+  DEPENDS+=@LINUX_2_6_22 +USE_UCLIBC:libnsl
 endef
 
 define Package/freeradius2-mod-chap
