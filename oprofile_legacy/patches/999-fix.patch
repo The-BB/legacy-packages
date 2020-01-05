@@ -1,0 +1,40 @@
+--- a/libutil++/bfd_support.cpp	2013-07-29 19:55:06.000000000 +0400
++++ b/libutil++/bfd_support.cpp	2019-08-27 07:42:24.187532200 +0300
+@@ -633,10 +633,14 @@
+ 
+ bool bfd_info::get_synth_symbols()
+ {
+-	extern const bfd_target bfd_elf64_powerpc_vec;
+-	extern const bfd_target bfd_elf64_powerpcle_vec;
+-	bool is_elf64_powerpc_target = (abfd->xvec == &bfd_elf64_powerpc_vec)
+-		|| (abfd->xvec == &bfd_elf64_powerpcle_vec);
++	const char* targname = bfd_get_target(abfd);
++	// Match elf64-powerpc and elf64-powerpc-freebsd, but not
++	// elf64-powerpcle.  elf64-powerpcle is a different ABI without
++	// function descriptors, so we don't need the synthetic
++	// symbols to have function code marked by a symbol.
++	bool is_elf64_powerpc_target = (!strncmp(targname, "elf64-powerpc", 13)
++					&& (targname[13] == 0
++					    || targname[13] == '-'));
+ 
+ 	if (!is_elf64_powerpc_target)
+ 		return false;
+--- a/libutil++/op_bfd.cpp	2013-07-29 19:55:05.000000000 +0400
++++ b/libutil++/op_bfd.cpp	2019-08-27 07:25:22.094127832 +0300
+@@ -415,15 +415,13 @@
+ {
+ 	op_bfd_symbol const & sym = syms[sym_idx];
+ 
+-	bool const verbose = cverb << (vbfd & vlevel1);
+-
+ 	if (anon_obj)
+ 		start = sym.vma();
+ 	else
+ 		start = sym.filepos();
+ 	end = start + sym.size();
+ 
+-	if (!verbose)
++	if (!(cverb << (vbfd & vlevel1)))
+ 		return;
+ 
+ 	io_state state(cverb << (vbfd & vlevel1));

@@ -15,20 +15,22 @@ PKG_RELEASE:=1
 
 PKG_SOURCE:=oprofile-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/oprofile
-PKG_MD5SUM:=00aec1287da2dfffda17a9b1c0a01868
+PKG_HASH:=00aec1287da2dfffda17a9b1c0a0186800aec1287da2dfffda17a9b1c0a01868
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(KERNEL_BUILD_DIR)/oprofile-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/oprofile-$(PKG_VERSION)
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@openwrt.org>
 
 PKG_BUILD_DEPENDS:=binutils
 PKG_LICENSE:=GPL-2.0+
+
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/nls.mk
 
 define Package/oprofile_legacy
   SECTION:=devel
@@ -50,15 +52,14 @@ define Package/oprofile-utils_legacy
   DEPENDS:=oprofile_legacy
 endef
 
+CONFIGURE_ARGS += \
+	--disable-optimization \
+	--disable-account-check \
+	--enable-gui=no \
+	--without-x
+
 CONFIGURE_VARS += \
 	ac_cv_lib_bfd_bfd_openr=no
-
-define Build/Configure
-	$(call Build/Configure/Default, \
-		--with-kernel-support \
-		--without-x \
-	)
-endef
 
 TARGET_CXXFLAGS += -fpermissive
 
