@@ -8,6 +8,7 @@
 # but we still have to use it as long as we on kernel 2.6.22.19
 
 include $(TOPDIR)/rules.mk
+include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ipset4
 PKG_VERSION:=4.5
@@ -17,7 +18,7 @@ PKG_SOURCE:=ipset-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=http://ipset.netfilter.org
 PKG_HASH:=fafc5954083c877d3cedaff38b02754bfafc5954083c877d3cedaff38b02754b
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/ipset-$(PKG_VERSION)
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/ipset-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
 
