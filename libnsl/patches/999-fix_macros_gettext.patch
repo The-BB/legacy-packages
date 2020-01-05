@@ -1,0 +1,11 @@
+--- a/po/Makefile.in.in	2019-08-17 14:57:12.196068380 +0300
++++ b/po/Makefile.in.in	2019-08-17 14:56:47.616423514 +0300
+@@ -114,7 +114,7 @@
+ 
+ # Ensure that the gettext macros and this Makefile.in.in are in sync.
+ CHECK_MACRO_VERSION = \
+-	test "$(GETTEXT_MACRO_VERSION)" = "@GETTEXT_MACRO_VERSION@" \
++	test "$(GETTEXT_MACRO_VERSION)" = "$(GETTEXT_MACRO_VERSION)" \
+ 	  || { echo "*** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version $(GETTEXT_MACRO_VERSION) but the autoconf macros are from gettext version @GETTEXT_MACRO_VERSION@" 1>&2; \
+ 	       exit 1; \
+ 	     }
