@@ -17,8 +17,11 @@ PKG_SOURCE:=bluez-utils-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://bluez.sourceforge.net/download
 PKG_HASH:=5704737aaf72104eeaf77335218a18275704737aaf72104eeaf77335218a1827
 
-PKG_FIXUP:=autoreconf
 PKG_BUILD_DIR:=$(BUILD_DIR)/bluez-utils-$(PKG_VERSION)
+
+PKG_FIXUP:=autoreconf
+
+PKG_CHECK_FORMAT_SECURITY:=0
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
