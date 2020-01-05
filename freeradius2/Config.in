@@ -4,11 +4,14 @@ choice
 	prompt "SSL library"
 	default FREERADIUS_OPENSSL
 	depends on PACKAGE_freeradius2-common
+	depends on LINUX_2_6_22
 
 config FREERADIUS_NOSSL
 	bool "No SSL support"
+	depends on LINUX_2_6_22
 
 config FREERADIUS_OPENSSL
 	bool "OpenSSL"
+	depends on LINUX_2_6_22
 
 endchoice

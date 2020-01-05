@@ -5,33 +5,36 @@
 # See /LICENSE for more information.
 #
 # Entware: use libtool from libtool package (trunk/libs/libtool) in Build/Compile
+# 2.x.x Series is EoL
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=freeradius2
-PKG_VERSION:=2.2.9
-PKG_RELEASE:=1
-PKG_BUILD_DEPENDS:=libtool
+PKG_VERSION:=2.2.10
+PKG_RELEASE:=1b
 
 PKG_SOURCE:=freeradius-server-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=\
+PKG_SOURCE_URL:= \
 	ftp://ftp.freeradius.org/pub/freeradius/ \
 	ftp://ftp.freeradius.org/pub/freeradius/old/
-PKG_MD5SUM:=d1398327ba4e23c75da06d8a0e01096b
+PKG_HASH:=a46b45cd23eefab0dddd75116203d28a866b49ea0d9200725f2a597ecbc4d4c8
+
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYRIGHT LICENSE
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/freeradius-server-$(PKG_VERSION)
-PKG_FIXUP:=autoreconf
-PKG_CHECK_FORMAT_SECURITY:=0
-
-PKG_CONFIG_DEPENDS := \
-  FREERADIUS_OPENSSL \
-  FREERADIUS_NOSSL
+PKG_FIXUP:=autoreconf libtool
+PKG_BUILD_DEPENDS:=libtool
 
 PKG_CHECK_FORMAT_SECURITY:=0
+
+PKG_CONFIG_DEPENDS:= \
+	FREERADIUS_OPENSSL \
+	FREERADIUS_NOSSL
+
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/nls.mk
 
 define Package/freeradius2/config
   source "$(SOURCE)/Config.in"
@@ -47,8 +50,9 @@ endef
 
 define Package/freeradius2
   $(call Package/freeradius2/Default)
-  DEPENDS:=+libltdl +libreadline +freeradius2-common @LINUX_2_6_22
   TITLE:=A flexible RADIUS server (version 2)
+  DEPENDS:=+libltdl +libreadline +freeradius2-common
+  DEPENDS+=@LINUX_2_6_22
 endef
 
 define Package/freeradius2/conffiles
@@ -66,7 +70,8 @@ endef
 define Package/freeradius2-common
   $(call Package/freeradius2/Default)
   TITLE:=common files
-  DEPENDS:=+libpthread +FREERADIUS_OPENSSL:libopenssl +zlib @LINUX_2_6_22
+  DEPENDS:=+libpthread +FREERADIUS_OPENSSL:libopenssl +zlib
+  DEPENDS+=@LINUX_2_6_22 +USE_UCLIBC:libubacktrace +USE_UCLIBC:libnsl
 endef
 
 define Package/freeradius2-mod-chap
